@@ -1,33 +1,23 @@
-Python 3.10.7 (tags/v3.10.7:6cc6b13, Sep  5 2022, 14:08:36) [MSC v.1933 64 bit (AMD64)] on win32
-Type "help", "copyright", "credits" or "license()" for more information.
->>> import requests
-... 
-... def fetch_data(option):
-...   url = f"https://swapi.mimo.dev/api/{option}/"
-...   data = []
-...   
-...   try:
-...     response = requests.get(url)
-...     response.raise_for_status()
-...     data = response.json()
-...     print(f"Number of entities: {len(data)}")
-...     return data
-... 
-...   except requests.HTTPError as e:
-...     print(f"Error: {e}")
-...     return None
-... 
-... option = input("Enter what StarWars data do you like to explore?").strip().lower()
-... data = fetch_data(option)
-... 
-... if data:
-...   for key in data:
-...     print(key["name"])
-... else:
-...   print("Unable to download data")
-... 
-... 
-... 
-... 
-... 
-... 
+import requests
+def fetch_data(option):
+    url = f"https://swapi.mimo.dev/api/{option}/"
+
+    try:
+        response = requests.get(url)
+        response.raise_for_status()
+        data = response.json()
+        print(f"Number of entities: {len(data)}")
+        return data
+
+    except requests.HTTPError as e:
+        print(f"Error: {e}")
+        return None
+
+option = input("Enter what StarWars data do you like to explore? ").strip().lower() #people
+data = fetch_data(option)
+
+if data:
+    for key in data:
+        print(key["name"])
+    else:
+        print("Unable to download data")
